@@ -1,2 +1,2 @@
-# class
+# Class
 All about class.

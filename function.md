@@ -1,4 +1,4 @@
-# function
+# Function
 All about 5003 function
 
 # Template
@@ -15,3 +15,5 @@ def  f(a, b):
     return(ans)
 
 ```
+
+# Functions 

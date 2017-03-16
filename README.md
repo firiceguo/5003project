@@ -1,6 +1,8 @@
 # 5003project
-All about 5003 project
+
 还有什么想到的可以直接添加到此文件中
+
+数据说明：[https://www.kaggle.com/c/yelp-recsys-2013/data](https://www.kaggle.com/c/yelp-recsys-2013/data)
 
 # Code Tips
 

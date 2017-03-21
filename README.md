@@ -2,6 +2,8 @@
 
 还有什么想到的可以直接添加到此文件中
 
+Github fork其他项目的分支与主干保持同步：[http://www.cnblogs.com/kakag/p/4287536.html](http://www.cnblogs.com/kakag/p/4287536.html)
+
 数据说明：[https://www.kaggle.com/c/yelp-recsys-2013/data](https://www.kaggle.com/c/yelp-recsys-2013/data)
 
 # Code Tips

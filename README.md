@@ -4,6 +4,8 @@ Github fork其他项目的分支与主干保持同步：[http://www.cnblogs.com/
 
 数据说明：[https://www.kaggle.com/c/yelp-recsys-2013/data](https://www.kaggle.com/c/yelp-recsys-2013/data)
 
+features：[https://www.kaggle.com/c/yelp-recsys-2013/discussion/5608](https://www.kaggle.com/c/yelp-recsys-2013/discussion/5608)
+
 # Code Tips
 
 1. 尽量把代码块用**函数**或者**类**表达。

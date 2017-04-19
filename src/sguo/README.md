@@ -11,13 +11,16 @@
     │
     ├─dataset
     │      businesses.json
+    │      libsvm_train.txt
     │      reviews.json
     │      stars.pk
     │      users.json
     │
     ├─src
-    │      getdata-output.txt
+    │      getdata-output.log
     │      getdata.py
+    │      getlibsvm_train.py
+    │      train.py
     │
     └─yelp_training_set
             yelp_training_set_business.json
@@ -34,7 +37,15 @@
 
 	用来生成`dataset`目录中的 json 和 pickle 数据。由于json不支持`(user_id, business_id)`这样的作为key，因此直接用pickle进行序列化。
 
-### 思路
+- `getlibsvm_train.py`
+
+	用来把文件合成`libsvm`格式
+
+- `train.py`
+
+	随机森林，参考[官方文档](http://spark.apache.org/docs/1.2.0/mllib-ensembles.html)
+
+### 处理数据思路
 
 Reference：[vsu_RecSys2013.pdf](https://github.com/firiceguo/Recommendation-NLP/blob/master/reference/zhangrong/vsu_RecSys2013.pdf) 的 abstract 和第二章
 

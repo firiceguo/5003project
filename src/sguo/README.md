@@ -4,7 +4,6 @@
 
 所有的数据均不存在，只留下了空文件用来表示结构
 
-
 ```
 └─sguo
     │  README.md
@@ -29,6 +28,13 @@
             yelp_training_set_user.json
 ```
 
+产生树状图方法：
+
+- Windows：powershell - `tree /f`
+
+- Linux: `tree -L`
+
+
 ### 代码
 
 在`./src` 目录中
@@ -43,7 +49,7 @@
 
 - `train.py`
 
-	随机森林，参考[官方文档](http://spark.apache.org/docs/1.2.0/mllib-ensembles.html)
+	随机森林，参考[官方文档](http://spark.apache.org/docs/1.2.0/mllib-decision-tree.html)
 
 ### 处理数据思路
 

@@ -1,0 +1,33 @@
+load dict users done!
+users = {key=user_id: value=user_template} * 43873
+{'loc': [], 'votes': [4, 1, 2], 'loc_num': 0, 'avg_star': 5.0, 'cates': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'rev_num': 1}
+
+load dict businesses done!
+businesses = {key=business_id: value=business_template} * 11537
+{'loc': [33.49817, -111.925638], 'votes': [], 'avg_star': 2.5, 'cates': [u'Print Media', u'Mass Media'], 'open': 1, 'rev_num': 11, 'ckins': []}
+
+load & dump dict reviews & stars done!
+reviews = {key=business_id: value={user_id: review_template}} * 11537
+{u'i2TRnWtvxxwJuynRKrw35Q': {'votes': [0, 0, 0], 'star': 5}, u'mbRUG6h0Mgb2XIJvscIoMg': {'votes': [0, 1, 1], 'star': 5}, u'UFvCKo6vi5yudcJGF9uEug': {'votes': [0, 0, 0], 'star': 5}}
+5
+
+important categories:
+[u'Restaurants', u'Shopping', u'Food', u'Beauty & Spas', u'Nightlife', u'Mexican', u'Automotive', u'Active Life', u'Bars', u'American (Traditional)']
+
+configure categories and location(user) done!
+dump users.json done!
+
+configure votes for businesses done!
+{'loc': [33.6371076, -112.2249764], 'votes': [4.857617605789824, 4.034214786832164, 5.846698309601132], 'avg_star': 3.5, 'cates': [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1], 'open': 1, 'rev_num': 6, 'ckins': []}
+
+load checkin data done!
+{'loc': [33.6371076, -112.2249764], 'votes': [4.857617605789824, 4.034214786832164, 5.846698309601132], 'avg_star': 3.5, 'cates': [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1], 'open': 1, 'rev_num': 6, 'ckins': [0, 0, 0, 2, 0, 0, 0, 1, 2, 0, 0, 0, 2, 6, 0]}
+
+important check-ins:
+[12, 13, 2, 7, 8]
+
+Dimensional reduction done! (from 15 to 5)
+Dump businesses data done!
+{'loc': [33.6371076, -112.2249764], 'votes': [4.857617605789824, 4.034214786832164, 5.846698309601132], 'avg_star': 3.5, 'cates': [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1], 'open': 1, 'rev_num': 6, 'ckins': [2, 6, 0, 1, 2]}
+
+{"loc": [33.3055295, -111.9027999], "votes": [441, 202, 372], "loc_num": 1, "avg_star": 3.69, "cates": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1], "rev_num": 314}

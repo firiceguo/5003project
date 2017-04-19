@@ -70,7 +70,7 @@ Reference：[vsu_RecSys2013.pdf](https://github.com/firiceguo/Recommendation-NLP
 	...   if key not in dic1:
 	...     dic1[key] = template
 	...     dic1[key]['a'] = key
-	...     print dic1			# 输出字典 dic1
+	...     print dic1          # 输出字典 dic1
 	...     print id(dic1[key]) # 输出地址
 	...
 	{'x': {'a': 'x', 'b': 2}}

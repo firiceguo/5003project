@@ -4,11 +4,11 @@
 
 ## TODO
 
-[x] 实验随机森林，无`cross-validation`，无`真实的测试集`，对应第一波
+- [x] 实验随机森林，无`cross-validation`，无`真实的测试集`，对应第一波
 
-[]  实现`cross-validation`和`真实的测试集`，对应第二波
+- []  实现`cross-validation`和`真实的测试集`，对应第二波
 
-[]  手写GBT（待定）
+- []  手写GBT（待定）
 
 ### 第一波 
 

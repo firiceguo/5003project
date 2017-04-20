@@ -81,7 +81,7 @@ Reference：[vsu_RecSys2013.pdf](https://github.com/firiceguo/Recommendation-NLP
 
 2. **重要**：python参数引用问题，本来想简单一点用`template`来写，但是碰见python的参数引用问题出错。简要重现如下：
 
-	```
+	```python
 	>>> template = {'a': 1, 'b':2}
 	>>> keys = ['x', 'y', 'z']
 	>>> dic1 = {}

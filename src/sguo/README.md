@@ -1,6 +1,8 @@
 # 说明
 
-### 目录结构
+运行结果在[这里](https://github.com/firiceguo/Recommendation-NLP/blob/master/src/sguo/src/README.md)
+
+## 目录结构
 
 所有的数据均不存在，只留下了空文件用来表示结构
 
@@ -35,7 +37,7 @@
 - Linux: `tree -L`
 
 
-### 代码
+## 代码
 
 在`./src` 目录中
 
@@ -51,7 +53,7 @@
 
 	随机森林，参考[官方文档](http://spark.apache.org/docs/1.2.0/mllib-decision-tree.html)
 
-### 处理数据思路
+## 处理数据思路
 
 Reference：[vsu_RecSys2013.pdf](https://github.com/firiceguo/Recommendation-NLP/blob/master/reference/zhangrong/vsu_RecSys2013.pdf) 的 abstract 和第二章
 
@@ -73,7 +75,7 @@ Reference：[vsu_RecSys2013.pdf](https://github.com/firiceguo/Recommendation-NLP
 
 数据例子参考代码输出日志 `getdata-output.log`。
 
-### python 的坑（debug过程）
+## python 的坑（debug过程）
 
 1. 笔误：`cates` 写成 `cate` 等等。
 

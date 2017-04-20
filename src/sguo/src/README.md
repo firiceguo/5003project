@@ -10,8 +10,9 @@
 
 - [ ]  手写GBT（待定）
 
-### 第一波 
-
+----------------------
+## 第一波 
+----------------------
 下面的结果仅仅针对训练集，没有用测试集
 
 1. model = 
@@ -44,9 +45,11 @@
     Test Mean Squared Error = 1.15461927248
     ```
 
-××总结：调参没用了，训不动，等第二波来××
+**总结：调参没用了，训不动，等第二波来**
 
-### 第二波
+-----------------------------
+## 第二波
+-----------------------------
 
 运行 `trainrf-cv.py`
 
@@ -59,8 +62,8 @@
     num_cv = 5
     test_rate = 0.2
     model.append(RandomForest.trainRegressor(train, categoricalFeaturesInfo={},
-                                                 numTrees=10, featureSubsetStrategy="auto",
-                                                 impurity='variance', maxDepth=10, maxBins=32))
+                                             numTrees=10, featureSubsetStrategy="auto",
+                                             impurity='variance', maxDepth=10, maxBins=32))
     ```
 
     结果：
@@ -85,8 +88,8 @@
     num_cv = 5
     test_rate = 0.2
     model.append(RandomForest.trainRegressor(train, categoricalFeaturesInfo={},
-                                                 numTrees=30, featureSubsetStrategy="auto",
-                                                 impurity='variance', maxDepth=5, maxBins=32))
+                                             numTrees=30, featureSubsetStrategy="auto",
+                                             impurity='variance', maxDepth=5, maxBins=32))
     ```
 
     结果：
@@ -111,8 +114,8 @@
     num_cv = 5
     test_rate = 0.2
     model.append(RandomForest.trainRegressor(train, categoricalFeaturesInfo={},
-                                                 numTrees=30, featureSubsetStrategy="auto",
-                                                 impurity='variance', maxDepth=10, maxBins=32))
+                                             numTrees=30, featureSubsetStrategy="auto",
+                                             impurity='variance', maxDepth=10, maxBins=32))
     ```
 
     结果：
@@ -128,4 +131,4 @@
     Final test Root Mean Squared Error = 1.097824
     ```
 
-××总结：第二次的参数效果较好××
+**总结：第二次的参数效果较好**

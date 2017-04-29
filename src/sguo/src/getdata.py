@@ -6,12 +6,12 @@ import json
 import cPickle as pickle
 
 now_path = os.getcwd() + '/'
-yelp_path = now_path + '../yelp_training_set/'
-business_path = yelp_path + 'yelp_training_set_business.json'
-checkin_path = yelp_path + 'yelp_training_set_checkin.json'
-review_path = yelp_path + 'yelp_training_set_review.json'
-user_path = yelp_path + 'yelp_training_set_user.json'
-data_path = now_path + '../dataset/'
+yelp_path = now_path + '../yelp/'
+business_path = yelp_path + 'yelp_academic_dataset_business.json'
+checkin_path = yelp_path + 'yelp_academic_dataset_checkin.json'
+review_path = yelp_path + 'yelp_academic_dataset_review.json'
+user_path = yelp_path + 'yelp_academic_dataset_user.json'
+data_path = now_path + '../big_dataset/'
 
 '''
 !!! Don't use the following templates directly !!!
@@ -50,6 +50,8 @@ def genJsonDataset(paths):
     # Yes: #review, average star, votes
     # No : location, #location, categories
     users = {}
+    # with open(paths[0], 'r') as f:
+    #     info = json.load(f)
     user_file = open(paths[0], 'r')
     item = user_file.readline()
     while item:
@@ -60,7 +62,7 @@ def genJsonDataset(paths):
             users[uid]['rev_num'] = info['review_count']
             users[uid]['avg_star'] = info['average_stars']
             users[uid]['votes'] = \
-                [info['votes']['useful'], info['votes']['funny'], info['votes']['cool']]
+                [info['useful'], info['funny'], info['cool']]
         item = user_file.readline()
     user_file.close()
     print 'load dict users done!'
@@ -84,13 +86,14 @@ def genJsonDataset(paths):
             businesses[info['business_id']]['avg_star'] = info['stars']
             businesses[info['business_id']]['loc'] = [info['latitude'], info['longitude']]
             businesses[info['business_id']]['cates'] = info['categories']
-            if not info['open']:
+            if not info['is_open']:
                 businesses[info['business_id']]['open'] = 0
-        for cate in info['categories']:
-            try:
-                categories[cate] += 1
-            except:
-                categories[cate] = 1
+        if info['categories'] is not None:
+            for cate in info['categories']:
+                try:
+                    categories[cate] += 1
+                except:
+                    categories[cate] = 1
         item = business_file.readline()
     business_file.close()
     print 'load dict businesses done!'
@@ -113,21 +116,27 @@ def genJsonDataset(paths):
             reviews[info['business_id']] = {info['user_id']: {'star': 0, 'votes': []}}
             reviews[info['business_id']][info['user_id']]['star'] = info['stars']
             reviews[info['business_id']][info['user_id']]['votes'] = \
-                [info['votes']['useful'], info['votes']['funny'], info['votes']['cool']]
+                [info['useful'], info['funny'], info['cool']]
         elif info['user_id'] not in reviews[info['business_id']]:
             reviews[info['business_id']][info['user_id']] = {'star': 0, 'votes': []}
             reviews[info['business_id']][info['user_id']]['star'] = info['stars']
             reviews[info['business_id']][info['user_id']]['votes'] = \
-                [info['votes']['useful'], info['votes']['funny'], info['votes']['cool']]
+                [info['useful'], info['funny'], info['cool']]
         item = review_file.readline()
     review_file.close()
     with open(data_path+'reviews.json', 'w') as f:
-        json.dump(reviews, f)
+        for key in reviews:
+            review = reviews[key]
+            review['b_id'] = key[0]
+            review['u_id'] = key[1]
+            j = json.dumps(review)
+            f.write(j)
+            f.write('\n')
     pickle.dump(stars, open(data_path+'stars.pk', 'wb'))
     print 'load & dump dict reviews & stars done!'
-    print 'reviews = {key=business_id: value={user_id: review_template}} * %d' % len(reviews)
-    print reviews[info['business_id']]
-    print stars[(info['business_id'], info['user_id'])]
+    # print 'reviews = {key=business_id: value={user_id: review_template}} * %d' % len(reviews)
+    # print reviews[info['business_id']]
+    # print stars[(info['business_id'], info['user_id'])]
     print
 
     # configure categories
@@ -142,9 +151,10 @@ def genJsonDataset(paths):
         businesses[bid]['cates'] = [0]*10
         num = 0
         for i in xrange(cate_num):
-            if important_cate[i] in local_cate:
-                businesses[bid]['cates'][i] = 1
-                num += 1
+            if local_cate is not None:
+                if important_cate[i] in local_cate:
+                    businesses[bid]['cates'][i] = 1
+                    num += 1
         businesses[bid]['cates'].append(num)
         # configure user info
         if bid in reviews:
@@ -171,7 +181,12 @@ def genJsonDataset(paths):
         users[uid]['cates'].append(num)
     print 'configure categories and location(user) done!'
     with open(data_path+'users.json', 'w') as f:
-        json.dump(users, f)
+        for key in users:
+            user = users[key]
+            user['u_id'] = key
+            j = json.dumps(user)
+            f.write(j)
+            f.write('\n')
     print 'dump users.json done!\n'
 
     # configure business_votes = sum(weights[i] * votes[i]),
@@ -209,6 +224,7 @@ def genJsonDataset(paths):
     checkin_file = open(checkin_path, 'r')
     sum_checkin = {}
     item = checkin_file.readline()
+    dayMap = {'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6}
     while item:
         info = json.loads(item)
         try:
@@ -216,9 +232,10 @@ def genJsonDataset(paths):
         except:
             item = checkin_file.readline()
             continue
-        for time in info['checkin_info']:
-            day = int(time.split('-')[1])
-            hour = int(time.split('-')[0])
+        for time in info['time']:
+            day = dayMap[time.split('-')[0]]
+            hour = int(time.split('-')[1].split(':')[0])
+            num_ckin = int(time.split(':')[1])
             if day in [0, 6]:
                 primary_key = 0
             elif day in [1, 2]:
@@ -236,7 +253,7 @@ def genJsonDataset(paths):
             else:
                 secondary_key = 4
             index = primary_key * 5 + secondary_key
-            businesses[info['business_id']]['ckins'][index] += info['checkin_info'][time]
+            businesses[info['business_id']]['ckins'][index] += num_ckin
             try:
                 sum_checkin[index] += 1
             except:
@@ -261,7 +278,12 @@ def genJsonDataset(paths):
         businesses[bid]['ckins'] = new_checkin
     print 'Dimensional reduction done! (from 15 to 5)'
     with open(data_path+'businesses.json', 'w') as f:
-        json.dump(businesses, f)
+        for key in businesses:
+            business = businesses[key]
+            business['b_id'] = key
+            j = json.dumps(business)
+            f.write(j)
+            f.write('\n')
     print 'Dump businesses data done!'
     print businesses[bid]
     print

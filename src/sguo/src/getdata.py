@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
 import os
@@ -101,14 +101,14 @@ def genJsonDataset(paths):
     # reviews = {key=business_id: value={user_id: review_template}}
     # Yes: star, votes
     # No : -
-    # stars = {key=(business_id, user_id), value=stars}
+    # stars = {key=(business_id, user_id), value={'stars': stars, 'rev_id': review_id}}
     reviews = {}
     stars = {}
     review_file = open(paths[1], 'r')
     item = review_file.readline()
     while item:
         info = json.loads(item)
-        stars[(info['business_id'], info['user_id'])] = info['stars']
+        stars[(info['business_id'], info['user_id'])] = {'stars': info['stars'], 'rev_id': info['review_id']}
         if info['business_id'] not in reviews:
             reviews[info['business_id']] = {info['user_id']: {'star': 0, 'votes': []}}
             reviews[info['business_id']][info['user_id']]['star'] = info['stars']
@@ -266,5 +266,5 @@ def genJsonDataset(paths):
     print businesses[bid]
     print
 
-
-genJsonDataset([user_path, review_path, checkin_path, business_path])
+if __name__ == '__main__':
+    genJsonDataset([user_path, review_path, checkin_path, business_path])

@@ -7,34 +7,39 @@
 所有的数据均不存在，只留下了空文件用来表示结构
 
 ```
-└─sguo
-    │  README.md
-    │
-    ├─dataset
-    │      businesses.json
-    │      libsvm_train.txt
-    │      reviews.json
-    │      stars.pk
-    │      users.json
-    │
-    ├─src
-    │      getdata-output.log
-    │      getdata.py
-    │      getlibsvm_train.py
-    │      train.py
-    │
-    └─yelp_training_set
-            yelp_training_set_business.json
-            yelp_training_set_checkin.json
-            yelp_training_set_review.json
-            yelp_training_set_user.json
+└── sguo
+    ├── dataset
+    │   ├── businesses.json
+    │   ├── libsvm_train.txt
+    │   ├── reviews.json
+    │   ├── stars.pk
+    │   └── users.json
+    ├── README.md
+    ├── src
+    │   ├── getdata-output.log
+    │   ├── getdata.py
+    │   ├── getlibsvm_train.py
+    │   ├── README.md
+    │   ├── test
+    │   │   ├── README.md
+    │   │   ├── trainrf-cv.py
+    │   │   ├── trainrf.py
+    │   │   └── trainxgb.py
+    │   └── traingbt.py
+    └── yelp_training_set
+        ├── yelp_training_set_business.json
+        ├── yelp_training_set_checkin.json
+        ├── yelp_training_set_review.json
+        └── yelp_training_set_user.json
+
+5 directories, 20 files
 ```
 
 产生树状图方法：
 
 - Windows：powershell - `tree /f`
 
-- Linux: `tree -L`
+- Linux: `tree -l`
 
 
 ## 代码
@@ -49,9 +54,13 @@
 
 	用来把文件合成`libsvm`格式
 
-- `train.py`
+- `traingbt.py`
 
-	随机森林，参考[官方文档](http://spark.apache.org/docs/1.2.0/mllib-decision-tree.html)
+	利用`spark`的`GBTRegresson`工具进行GBT的回归训练。**等合起来的时候可以直接用其中的函数**。
+
+- `test/trainrf.py` & `test/trainrf-cf.py`
+
+	随机森林及其cross-validation版本，参考[官方文档](http://spark.apache.org/docs/1.2.0/mllib-decision-tree.html)
 
 ## 处理数据思路
 
@@ -73,7 +82,7 @@ Reference：[vsu_RecSys2013.pdf](https://github.com/firiceguo/Recommendation-NLP
 
 6. 处理`yelp_training_set_checkin.json`，统计每家店的checkin信息，并用函数`reduceDimension(dic, num)`对所有`checkin`进行降维处理，方法参考**Reference - section 2.4**。
 
-数据例子参考代码输出日志 `getdata-output.log`。
+数据例子参考代码输出日志 [getdata-output.log](https://github.com/firiceguo/Recommendation-NLP/blob/master/src/sguo/src/getdata-output.log)。
 
 ## python 的坑（debug过程）
 

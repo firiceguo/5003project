@@ -6,11 +6,12 @@
 
 - [x] 实验随机森林，无`cross-validation`，无`真实的测试集`，对应第一波
 
-- [x]  实现`cross-validation`和`真实的测试集`，对应第二波
+- [x] 实现`cross-validation`和`真实的测试集`，对应第二波
 
-- [ ]  手写GBT（待定）
+- [x] 实现GBT，对应第三波
 
-----------------------
+- [ ] 写从`mongodb`读取数据的方法
+
 ## 第一波 
 
 下面的结果仅仅针对训练集，没有用测试集
@@ -47,7 +48,6 @@
 
 **总结：调参没用了，训不动，等第二波来**
 
------------------------------
 ## 第二波
 
 运行 `trainrf-cv.py`
@@ -131,3 +131,23 @@
     ```
 
 **总结：第二次的参数效果较好**
+
+## 第三波
+
+运行 `traingbt.py`
+
+1. `maxIter=5, maxDepth=2, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=5, maxDepth=2, seed=42)
+
+RMSE = 1.03398484
+```
+
+2. `maxIter=50, maxDepth=6, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=50, maxDepth=6, seed=42)
+
+RMSE = 0.96054627
+```

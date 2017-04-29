@@ -10,43 +10,41 @@
 
 - [x] 实现GBT，对应第三波
 
+- [x] 在大数据集上跑上面的内容，对应第四波
+
 - [ ] 写从`mongodb`读取数据的方法
 
-## 第一波 
+- [ ] 合并所有方法
 
-下面的结果仅仅针对训练集，没有用测试集
+## 第四波（在大数据集上面跑）
 
-1. model = 
+1. `maxIter=5, maxDepth=2, seed=42`
 
-    ```
-    RandomForest.trainRegressor(trainingData, categoricalFeaturesInfo={},
-                                numTrees=3, featureSubsetStrategy="auto",
-                                impurity='variance', maxDepth=4, maxBins=32)
+```python
+gbt = GBTRegressor(maxIter=5, maxDepth=2, seed=42)
 
-    Test Mean Squared Error = 1.16816262811
-    ```
+RMSE = 1.14729976
+```
 
-2. model = 
+## 第三波
 
-    ```
-    RandomForest.trainRegressor(trainingData, categoricalFeaturesInfo={},
-                                numTrees=30, featureSubsetStrategy="auto",
-                                impurity='variance', maxDepth=5, maxBins=32)
-                                      
-    Test Mean Squared Error = 1.15278999013
-    ```
-    
-3. model = 
+运行 `traingbt.py`
 
-    ```
-    RandomForest.trainRegressor(trainingData, categoricalFeaturesInfo={},
-                                numTrees=100, featureSubsetStrategy="auto",
-                                impurity='variance', maxDepth=20, maxBins=32)
-                                       
-    Test Mean Squared Error = 1.15461927248
-    ```
+1. `maxIter=5, maxDepth=2, seed=42`
 
-**总结：调参没用了，训不动，等第二波来**
+```python
+gbt = GBTRegressor(maxIter=5, maxDepth=2, seed=42)
+
+RMSE = 1.03398484
+```
+
+2. `maxIter=50, maxDepth=6, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=50, maxDepth=6, seed=42)
+
+RMSE = 0.96054627
+```
 
 ## 第二波
 
@@ -132,22 +130,38 @@
 
 **总结：第二次的参数效果较好**
 
-## 第三波
+## 第一波 
 
-运行 `traingbt.py`
+下面的结果仅仅针对训练集，没有用测试集
 
-1. `maxIter=5, maxDepth=2, seed=42`
+1. model = 
 
-```python
-gbt = GBTRegressor(maxIter=5, maxDepth=2, seed=42)
+    ```
+    RandomForest.trainRegressor(trainingData, categoricalFeaturesInfo={},
+                                numTrees=3, featureSubsetStrategy="auto",
+                                impurity='variance', maxDepth=4, maxBins=32)
 
-RMSE = 1.03398484
-```
+    Test Mean Squared Error = 1.16816262811
+    ```
 
-2. `maxIter=50, maxDepth=6, seed=42`
+2. model = 
 
-```python
-gbt = GBTRegressor(maxIter=50, maxDepth=6, seed=42)
+    ```
+    RandomForest.trainRegressor(trainingData, categoricalFeaturesInfo={},
+                                numTrees=30, featureSubsetStrategy="auto",
+                                impurity='variance', maxDepth=5, maxBins=32)
+                                      
+    Test Mean Squared Error = 1.15278999013
+    ```
+    
+3. model = 
 
-RMSE = 0.96054627
-```
+    ```
+    RandomForest.trainRegressor(trainingData, categoricalFeaturesInfo={},
+                                numTrees=100, featureSubsetStrategy="auto",
+                                impurity='variance', maxDepth=20, maxBins=32)
+                                       
+    Test Mean Squared Error = 1.15461927248
+    ```
+
+**总结：调参没用了，训不动，等第二波来**

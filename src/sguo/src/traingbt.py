@@ -35,28 +35,25 @@ def add(v1, v2):
 
 
 def loadDataJson(business_path='', user_path='', star_path=''):
-    with open(business_path, 'r') as f:
-        business = json.load(f)
-    businessDF = sc.parallelize([(k, tuple2sparse(
-                                 tuple(v['loc']) +
-                                 tuple(v['votes']) +
-                                 (v['avg_star'], ) +
-                                 tuple(v['cates']) +
-                                 (v['rev_num'], ) +
-                                 tuple(v['ckins']), begin=19, end=42)) for k, v in business.items()]) \
-                   .toDF(['b_id'] + ['b_features'])
-    with open(user_path, 'r') as f:
-        user = json.load(f)
-    userDF = sc.parallelize([(k, tuple2sparse(
-                            tuple(v['loc']) +
-                            tuple(v['votes']) +
-                            (v['loc_num'], v['avg_star']) +
-                            tuple(v['cates']) +
-                            (v['rev_num'], ), begin=0, end=19)) for k, v in user.items()]) \
-               .toDF(['u_id'] + ['u_features'])
+    bDF = spark.read.json(business_path)
+    uDF = spark.read.json(user_path)
+
+    businessDF = bDF.rdd.map(lambda x: (x['b_id'], tuple2sparse(
+                             tuple(x['loc']) + tuple(x['votes']) + (x['avg_star'], ) +
+                             tuple(x['cates']) + (x['rev_num'], ) + tuple(x['ckins']),
+                             begin=19, end=42)))\
+                    .toDF(['b_id', 'b_features'])
+
+    userDF = uDF.rdd.map(lambda x: (x['u_id'], tuple2sparse(
+                         tuple(x['loc']) + tuple(x['votes']) +
+                         (x['loc_num'], x['avg_star'], x['rev_num']) + tuple(x['cates']),
+                         begin=0, end=19)))\
+                .toDF(['u_id', 'u_features'])
+
     stars = pickle.load(open(star_path, 'rb'))
     starDF = sc.parallelize([(list(k)[0], list(k)[1]) + (v['stars'], v['rev_id']) for k, v in stars.items()]) \
                .toDF(['b_id', 'u_id', 'label', 'rev_id'])
+
     return businessDF, userDF, starDF
 
 

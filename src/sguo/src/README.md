@@ -26,6 +26,15 @@ gbt = GBTRegressor(maxIter=5, maxDepth=2, seed=42)
 RMSE = 1.14729976
 ```
 
+2. `maxIter=50, maxDepth=6, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=50, maxDepth=6, seed=42)
+
+RMSE = 1.05118689
+```
+
+
 ## 第三波
 
 运行 `traingbt.py`

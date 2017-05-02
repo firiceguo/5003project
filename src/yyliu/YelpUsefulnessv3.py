@@ -90,7 +90,6 @@ def loadReviewDataJson(datafrom='', review_path=''):
         print "This is the schema for extracted data"
         print '*'* 100
 
-        #selectreviewDF = selectreviewDF.limit(100)
         selectreviewDF.printSchema()
 
     elif datafrom == 'mongodb':
@@ -114,7 +113,6 @@ def loadReviewDataJson(datafrom='', review_path=''):
         print "This is the schema for extracted data"
         print '*'* 100
 
-        #selectreviewDF = selectreviewDF.limit(100)
         selectreviewDF.printSchema()
 
 
@@ -247,7 +245,4 @@ if __name__ == '__main__':
 
 
 sc.stop()
-
-
-###### GetRecomReviewList这里有个bug还没搞出来，其他没什么
 

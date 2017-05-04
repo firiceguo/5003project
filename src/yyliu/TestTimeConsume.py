@@ -69,6 +69,44 @@ Load Review data and read it into a Dataframe named as reviewDF, select useful c
 """
 
 
+def loadDataJson(collection_name, datafrom='', path='', Datalimit = False, DatalimitNum = 0):
+
+    if datafrom == 'json':
+
+        DF = spark.read.json(path)
+
+        print '*'*100
+        print "This is the schema in original json review file"
+        print '*'* 100
+
+        #DF.printSchema()
+
+        if Datalimit == True:
+            # Use limited dataset: enable the limit and cache()
+            DF = DF.limit(DatalimitNum)
+            DF.cache()
+
+
+    elif datafrom == 'mongodb':
+
+        DF = spark.read.format("com.mongodb.spark.sql.DefaultSource").option("uri",
+        "mongodb://127.0.0.1/users."+collection_name).load()
+
+        print '*'*100
+        print "This is the schema in original mongoDB review collection"
+        print '*'* 100
+
+        #DF.printSchema()
+
+        if Datalimit == True:
+            # Use limited dataset: enable the limit and cache()
+            DF = DF.limit(DatalimitNum)
+            DF.cache()
+
+
+    return DF
+
+
 
 def loadDataJson(collection_name, datafrom='', path=''):
 

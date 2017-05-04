@@ -64,12 +64,14 @@ spark = SparkSession \
     .config("spark.mongodb.output.uri", "mongodb://127.0.0.1/users") \
     .getOrCreate()
 
-"""
-Load Review data and read it into a Dataframe named as reviewDF, select useful columns and save it as selectreviewDF
-"""
 
+def loadDataJson(name, datafrom='', path='', Datalimit = False, DatalimitNum = 0):
 
-def loadDataJson(collection_name, datafrom='', path='', Datalimit = False, DatalimitNum = 0):
+    #name specify the name of collection in mongodb or type of json file.
+    #datafrom specify where the data come from ('mongodb' or 'json')
+    #Datalimit specify if you want to use limit data. and DatalimitNum specify the number of data you want to use.
+    #if use limit data, cache it after loading from mongoDB or json.
+
 
     if datafrom == 'json':
 
@@ -79,62 +81,33 @@ def loadDataJson(collection_name, datafrom='', path='', Datalimit = False, Datal
         print "This is the schema in original json review file"
         print '*'* 100
 
-        #DF.printSchema()
+        DF.printSchema()
 
         if Datalimit == True:
             # Use limited dataset: enable the limit and cache()
             DF = DF.limit(DatalimitNum)
-            DF.cache()
 
 
     elif datafrom == 'mongodb':
 
         DF = spark.read.format("com.mongodb.spark.sql.DefaultSource").option("uri",
-        "mongodb://127.0.0.1/users."+collection_name).load()
+        "mongodb://127.0.0.1/users."+name).load()
 
         print '*'*100
         print "This is the schema in original mongoDB review collection"
         print '*'* 100
 
-        #DF.printSchema()
+        DF.printSchema()
 
         if Datalimit == True:
             # Use limited dataset: enable the limit and cache()
             DF = DF.limit(DatalimitNum)
-            DF.cache()
 
 
     return DF
 
 
 
-def loadDataJson(collection_name, datafrom='', path=''):
-
-    if datafrom == 'json':
-
-        DF = spark.read.json(path)
-
-        print '*'*100
-        print "This is the schema in original json review file"
-        print '*'* 100
-
-        #DF.printSchema()
-
-
-    elif datafrom == 'mongodb':
-
-        DF = spark.read.format("com.mongodb.spark.sql.DefaultSource").option("uri",
-        "mongodb://127.0.0.1/users."+collection_name).load()
-
-        print '*'*100
-        print "This is the schema in original mongoDB review collection"
-        print '*'* 100
-
-
-        #DF.printSchema()
-
-
-    return DF
 
 
 if __name__ == '__main__':

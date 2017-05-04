@@ -68,7 +68,7 @@ spark = SparkSession \
 Load Review data and read it into a Dataframe named as reviewDF, select useful columns and save it as selectreviewDF
 """
 
-def loadDataJson(collection_name, datafrom='', path='', Datalimit = False, DatalimitNum = 0):
+def loadDataJson(name, datafrom='', path='', Datalimit = False, DatalimitNum = 0):
 
     #name specify the name of collection in mongodb or type of json file.
     #datafrom specify where the data come from ('mongodb' or 'json')
@@ -93,7 +93,7 @@ def loadDataJson(collection_name, datafrom='', path='', Datalimit = False, Datal
     elif datafrom == 'mongodb':
 
         DF = spark.read.format("com.mongodb.spark.sql.DefaultSource").option("uri",
-        "mongodb://127.0.0.1/users."+collection_name).load()
+        "mongodb://127.0.0.1/users."+name).load()
 
         print '*'*100
         print "This is the schema in original mongoDB review collection"

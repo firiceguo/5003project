@@ -12,21 +12,27 @@
 
 - [x] 在大数据集上跑上面的内容，对应第四波
 
-- [ ] 写从`mongodb`读取数据的方法
+- [x] 写从`mongodb`读取数据的方法 (大魔王完成)
 
 - [ ] 合并所有方法
 
 ## 第四波（在大数据集上面跑）
 
-1. `maxIter=5, maxDepth=2, seed=42`
+|maxIter|maxDepth|RMSE|
+|:---------:|:----------:|:---------:|
+|5|2|1.14729976|
+|10|2|1.12052114|
+|10|4|1.06971257|
+|10|6|1.05618326|
+|10|8|1.05188215|
+|10|10|1.05102746|
+|10|12|1.05331973|
+|10|14|1.06188889|
+|50|6|1.05118689|
+|50|10|1.04932254|
 
-```python
-gbt = GBTRegressor(maxIter=5, maxDepth=2, seed=42)
 
-RMSE = 1.14729976
-```
-
-2. `maxIter=50, maxDepth=6, seed=42`
+1. `maxIter=50, maxDepth=6, seed=42`
 
 ```python
 gbt = GBTRegressor(maxIter=50, maxDepth=6, seed=42)
@@ -34,6 +40,69 @@ gbt = GBTRegressor(maxIter=50, maxDepth=6, seed=42)
 RMSE = 1.05118689
 ```
 
+2. `maxIter=10, maxDepth=2, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=10, maxDepth=2, seed=42)
+
+RMSE = 1.12052114
+```
+
+3. `maxIter=10, maxDepth=4, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=10, maxDepth=4, seed=42)
+
+RMSE = 1.06971257
+```
+
+4. `maxIter=10, maxDepth=6, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=10, maxDepth=6, seed=42)
+
+RMSE = 1.05618326
+```
+
+5. `maxIter=10, maxDepth=8, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=10, maxDepth=8, seed=42)
+
+RMSE = 1.05188215
+```
+
+6. `maxIter=10, maxDepth=10, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=10, maxDepth=10, seed=42)
+
+RMSE = 1.05102746
+```
+
+7. `maxIter=10, maxDepth=12, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=10, maxDepth=12, seed=42)
+
+RMSE = 1.05331973
+```
+
+8. `maxIter=10, maxDepth=14, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=10, maxDepth=14, seed=42)
+
+RMSE = 1.06188889
+```
+
+9. `maxIter=50, maxDepth=10, seed=42`
+
+```python
+gbt = GBTRegressor(maxIter=50, maxDepth=10, seed=42)
+
+RMSE = 1.06188889
+```
 
 ## 第三波
 

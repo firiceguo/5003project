@@ -12,6 +12,11 @@ There are three files in final version: Sentiment\_based\_model.py:,  topic\_bas
 
 ## Sentiment\_based\_model.py
 
+Reminder: You need to install nltk package before you run it. Besides, some corpuses are required as well. You may need to use nltk.download to download them:
+
+1. SentimentIntensityAnalyzer
+2. Tokenizer
+
 ### Function list:
 
 1. loadDataJson: Load data from json or mongoDB

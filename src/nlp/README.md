@@ -18,6 +18,11 @@ Besides, some corpuses are required as well. You may need to use `nltk.download(
 
 2. Tokenizer
 
+Reminder: You need to install nltk package before you run it. Besides, some corpuses are required as well. You may need to use nltk.download to download them:
+
+1. SentimentIntensityAnalyzer
+2. Tokenizer
+
 ### Function list:
 
 1. `loadData`: Load data from json or mongoDB
